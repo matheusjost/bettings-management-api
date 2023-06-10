@@ -1,0 +1,12 @@
+# automatically generated files
+node_modules/
+dist/
+*.log
+
+# env
+.env
+
+# ide
+.vscode/
+*.sublime-*
+*.swp
