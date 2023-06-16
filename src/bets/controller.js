@@ -24,7 +24,7 @@ const addBet = (req, res) => {
     const { event, selection, stake, odds, status, date } = req.body;
     pool.query(querries.addBet, [event, selection, stake, odds, status, date], (error, results) => {
         if (error) throw error;
-        res.status(201).send("added the selection to you bookings!");
+        res.status(201).send({ message: `selection added to your bookings!`});
     })
 }
 
@@ -35,11 +35,11 @@ const deleteBet = (req, res) => {
     pool.query(querries.getBetByID, [id], (error, results) => {
         const noBetFound = !results.rows.length;
         if (noBetFound){
-            res.send("this selection doesn't exist on your bookings. couldn't remove it.");
+            res.send({ message: `${req.params.id} doesn't exist on your bookings. couldn't remove it.`});
         }
         pool.query(querries.deleteBet, [id], (error, results) => {
             if (error) throw error;
-            res.status(200).send("selection removed from your bookings.")
+            res.status(200).send({ message: `${req.params.id} selection removed from your bookings.` })
         })
     })
 }
@@ -54,11 +54,11 @@ const updateBet = (req, res) => {
     pool.query(querries.getBetByID, [id], (error, results) => {
         const noBetFound = !results.rows.length;
         if (noBetFound){
-            res.send("this selection doesn't exist on your bookings. couldn't update it.");
+            res.send({ message: `${req.params.id} doesn't exist on your bookings. couldn't update it.`});
         }
         pool.query(querries.updateBet, [id, stake, odds, status], (error, results) => {
             if (error) throw error;
-            res.status(200).send("selection updated on your bookings.")
+            res.status(200).send({ message: `${req.params.id} selection updated on your bookings.`})
         })
     })
 }

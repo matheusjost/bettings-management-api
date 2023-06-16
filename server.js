@@ -11,4 +11,4 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/bets', betsRoutes);
 
-app.listen(port, () => console.log('RUNNING APP ON', port))
+app.listen(port, () => console.log(`RUNNING APP ON ${port}`))
